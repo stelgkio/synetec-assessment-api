@@ -1,3 +1,6 @@
+using Accepted.Validators;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SynetecAssessmentApi.Infrastructure;
+using SynetecAssessmentApi.Infrastructure.Interfaces;
+using SynetecAssessmentApi.Infrastructure.Services;
 using SynetecAssessmentApi.Persistence;
 
 namespace SynetecAssessmentApi
@@ -21,14 +27,22 @@ namespace SynetecAssessmentApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                ); ;
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SynetecAssessmentApi", Version = "v1" });
             });
 
+            services.AddTransient<IBonusPoolServices, BonusPoolService>();
+            services.AddScoped(typeof(IEmployeeService), typeof(EmployeeService));
+            services.AddValidatorsFromAssembly(typeof(StartupSetup).Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+         
             services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "HrDb"));
+            services.AddMediatR(typeof(StartupSetup).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

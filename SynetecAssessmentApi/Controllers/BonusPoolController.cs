@@ -1,29 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using SynetecAssessmentApi.Dtos;
-using SynetecAssessmentApi.Services;
+using SynetecAssessmentApi.Infrastructure.Command;
+using SynetecAssessmentApi.Infrastructure.Query;
 using System.Threading.Tasks;
 
 namespace SynetecAssessmentApi.Controllers
 {
-    [Route("api/[controller]")]
-    public class BonusPoolController : Controller
+
+    public class BonusPoolController : BaseController
     {
+        private readonly IMediator _mediator;
+
+        public BonusPoolController(IMediator mediator)
+        {
+            _mediator = mediator;              
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var bonusPoolService = new BonusPoolService();
+            var query = new GetAllEmployeesQuery();
+            var result = await _mediator.Send(query);
 
-            return Ok(await bonusPoolService.GetEmployeesAsync());
+            return Ok(result);
         }
 
         [HttpPost()]
         public async Task<IActionResult> CalculateBonus([FromBody] CalculateBonusDto request)
         {
-            var bonusPoolService = new BonusPoolService();
+            var query = new CalculateBonusCommand(request.TotalBonusPoolAmount, request.SelectedEmployeeId);
+            var result = await _mediator.Send(query);
 
-            return Ok(await bonusPoolService.CalculateAsync(
-                request.TotalBonusPoolAmount,
-                request.SelectedEmployeeId));
+            return Ok(result);
         }
     }
 }

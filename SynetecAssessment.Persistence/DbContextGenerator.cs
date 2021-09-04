@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SynetecAssessmentApi.Domain;
+using SynetecAssessmentApi.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,10 @@ namespace SynetecAssessmentApi.Persistence
         {
             var departments = new List<Department>
             {
-                new Department(1, "Finance", "The finance department for the company"),
-                new Department(2, "Human Resources", "The Human Resources department for the company"),
-                new Department(3, "IT", "The IT support department for the company"),
-                new Department(4, "Marketing", "The Marketing department for the company")
+                new Department(1, DepartmentTitles.Finance , "The finance department for the company"),
+                new Department(2,  DepartmentTitles.Human_Resources, "The Human Resources department for the company"),
+                new Department(3,  DepartmentTitles.IT, "The IT support department for the company"),
+                new Department(4,  DepartmentTitles.Marketing, "The Marketing department for the company")
             };
 
             var employees = new List<Employee>

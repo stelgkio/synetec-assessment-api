@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SynetecAssessmentApi.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SynetecAssessment.Persistence\SynetecAssessmentApi.Persistence.csproj" />
+    <ProjectReference Include="..\SynetecAssessmentApi.Domain\SynetecAssessmentApi.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

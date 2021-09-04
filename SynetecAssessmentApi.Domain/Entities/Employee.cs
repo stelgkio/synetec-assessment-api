@@ -1,20 +1,21 @@
-﻿using System;
+﻿using SynetecAssessmentApi.Domain.Shared;
+using System;
 
 namespace SynetecAssessmentApi.Domain
 {
-    public class Employee : Entity
+    public class Employee : BaseEntity
     {
         public string Fullname { get; set; }
         public string JobTitle { get; set; }
-        public int Salary { get; set; }
+        public decimal Salary { get; set; }
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        public virtual Department Department { get; set; }
 
         public Employee(
             int id,
             string fullname,
             string jobTitle,
-            int salary,
+            decimal salary,
             int departmentId) :base(id)
         {
             Id = id;

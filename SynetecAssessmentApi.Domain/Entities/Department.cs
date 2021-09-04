@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using SynetecAssessmentApi.Domain.Enums;
+using SynetecAssessmentApi.Domain.Shared;
+using System.Collections.Generic;
 
 namespace SynetecAssessmentApi.Domain
 {
-    public class Department : Entity
+    public class Department : BaseEntity
     {
-        public string Title { get; set; }
+        public DepartmentTitles Title { get; set; }
         public string Description { get; set; }
         public IEnumerable<Employee> Employees { get; set; }
 
         public Department(
             int id,
-            string title,
+            DepartmentTitles title,
             string description) : base(id)
         {
             Title = title;
