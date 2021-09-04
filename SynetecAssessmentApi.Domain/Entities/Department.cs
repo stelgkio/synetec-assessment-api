@@ -8,7 +8,7 @@ namespace SynetecAssessmentApi.Domain
     {
         public DepartmentTitles Title { get; set; }
         public string Description { get; set; }
-        public IEnumerable<Employee> Employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
 
         public Department(
             int id,

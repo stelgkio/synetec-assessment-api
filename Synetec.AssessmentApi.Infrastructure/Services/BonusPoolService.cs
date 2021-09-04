@@ -23,13 +23,13 @@ namespace SynetecAssessmentApi.Infrastructure.Services
                             .Include(x=> x.Department)              
                             .FirstOrDefaultAsync(item => item.Id == selectedEmployeeId);
 
-            int totalSalary = (int)_dbContext.Employees.Sum(item => item.Salary);
+            var totalSalary =  await _dbContext.Employees.SumAsync(item => item.Salary);
             var percen = new PercentageCalculator();
             decimal bonusPercentage = percen.Persentage(employee.Salary, totalSalary);
             var allocation = new AllocationBonus();
-            var bonusAllocation = allocation.BonusAllocation(bonusPercentage, totalSalary);
+            decimal bonusAllocation = allocation.BonusAllocation(bonusPercentage, totalSalary);
 
-            return (new BonusPoolCalculatorResultDto { Amount = bonusAllocation, Employee = employee });
+            return new BonusPoolCalculatorResultDto { Amount = bonusAllocation, Employee = employee };
 
         }
       

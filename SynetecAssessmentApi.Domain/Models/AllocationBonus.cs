@@ -6,9 +6,10 @@ namespace SynetecAssessmentApi.Domain.Models
 {
     public class AllocationBonus
     {
-        public double BonusAllocation(decimal amount, decimal totalAmount)
+        public decimal BonusAllocation(decimal bonusPercentage, decimal totalSalary)
         {
-            return (double)(amount * totalAmount);
+            var x =(bonusPercentage * totalSalary);
+            return x;
         }
 
     }

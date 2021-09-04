@@ -4,7 +4,7 @@ namespace SynetecAssessmentApi.Infrastructure.Dtos
 {
     public class BonusPoolCalculatorResultDto
     {
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public Employee Employee { get; set; }
     }
 }
