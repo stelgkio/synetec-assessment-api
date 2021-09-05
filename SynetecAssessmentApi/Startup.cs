@@ -36,7 +36,7 @@ namespace SynetecAssessmentApi
             });
 
             services.AddTransient<IBonusPoolServices, BonusPoolService>();
-            services.AddScoped(typeof(IEmployeeService), typeof(EmployeeService));
+            services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddValidatorsFromAssembly(typeof(StartupSetup).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
          

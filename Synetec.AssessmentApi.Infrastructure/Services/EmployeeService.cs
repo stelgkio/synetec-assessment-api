@@ -21,7 +21,15 @@ namespace SynetecAssessmentApi.Infrastructure.Services
 
         public async Task<List<Employee>> GetAllEmployees()
         {
-            return await _context.Employees.Include(e => e.Department).ToListAsync();
+            try {
+
+                return await _context.Employees.Include(e => e.Department).ToListAsync();
+
+            } catch (Exception ex) {
+
+                throw new Exception(ex.Message);
+            }
+          
         }
     }
 }

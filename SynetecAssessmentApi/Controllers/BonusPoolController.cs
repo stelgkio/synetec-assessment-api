@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SynetecAssessmentApi.Dtos;
 using SynetecAssessmentApi.Infrastructure.Command;
 using SynetecAssessmentApi.Infrastructure.Query;
+using System;
 using System.Threading.Tasks;
 
 namespace SynetecAssessmentApi.Controllers
@@ -20,19 +21,31 @@ namespace SynetecAssessmentApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var query = new GetAllEmployeesQuery();
-            var result = await _mediator.Send(query);
+            try {
+                var query = new GetAllEmployeesQuery();
+                var result = await _mediator.Send(query);
 
-            return Ok(result);
+                 return Ok(result);
+            } catch (Exception ex) {
+
+               return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost()]
         public async Task<IActionResult> CalculateBonus([FromBody] CalculateBonusDto request)
         {
-            var query = new CalculateBonusCommand(request.TotalBonusPoolAmount, request.SelectedEmployeeId);
-            var result = await _mediator.Send(query);
+            try {
+                var query = new CalculateBonusCommand(request.TotalBonusPoolAmount, request.SelectedEmployeeId);
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            } catch (Exception ex) {
 
-            return Ok(result);
+                return BadRequest(ex.Message);
+            }
+           
+
+           
         }
     }
 }
