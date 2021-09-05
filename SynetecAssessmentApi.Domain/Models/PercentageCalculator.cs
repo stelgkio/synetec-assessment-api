@@ -4,7 +4,7 @@
     {
         public decimal Persentage(decimal Salary, decimal TotalSalary)
         {
-            return Salary / TotalSalary;
+            return decimal.Round( Salary / TotalSalary,2);
         }
 
     }

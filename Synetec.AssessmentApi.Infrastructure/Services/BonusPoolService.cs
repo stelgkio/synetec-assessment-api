@@ -27,10 +27,14 @@ namespace SynetecAssessmentApi.Infrastructure.Services
                            .FirstOrDefaultAsync(item => item.Id == selectedEmployeeId);
 
                 var totalSalary = await _dbContext.Employees.SumAsync(item => item.Salary);
+
                 var percen = new PercentageCalculator();
                 decimal bonusPercentage = percen.Persentage(employee.Salary, totalSalary);
+
                 var allocation = new AllocationBonus();
                 decimal bonusAllocation = allocation.BonusAllocation(bonusPercentage, bonusPoolAmount);
+
+
 
                 return new BonusPoolCalculatorResultDto { Amount = bonusAllocation, Employee = employee };
             } catch (Exception ex) {
