@@ -29,7 +29,6 @@ namespace SynetecAssessmentApi.Test
             Assert.IsType<BonusPoolCalculatorResultDto>(result);
             Assert.NotNull(result);
 
-
         }
     }
    

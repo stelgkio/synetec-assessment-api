@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SynetecAssessmentApi.Infrastructure.Services
 {
-    public class BonusPoolService   : IBonusPoolServices
+    public class BonusPoolService : IBonusPoolServices
     {
         private readonly AppDbContext _dbContext;
 
@@ -28,18 +28,14 @@ namespace SynetecAssessmentApi.Infrastructure.Services
 
                 var totalSalary = await _dbContext.Employees.SumAsync(item => item.Salary);
 
-
                 decimal bonusPercentage = Percetange(employee.Salary, totalSalary);
                 decimal bonusAllocation = Allocation(bonusPercentage, bonusPoolAmount);
-
-
 
                 return new BonusPoolCalculatorResultDto { Amount = bonusAllocation, Employee = employee };
             } catch (Exception ex) {
 
                 throw new Exception(ex.Message);
-            }
-           
+            }           
 
         }
         public decimal Percetange(decimal Salary, decimal TotalSalary)
@@ -52,11 +48,6 @@ namespace SynetecAssessmentApi.Infrastructure.Services
         {
             var allocation = new AllocationBonus();
             return allocation.BonusAllocation(bonusPercentage, bonusPoolAmount);
-        }
-
-
-
-
-      
+        }        
     }
 }

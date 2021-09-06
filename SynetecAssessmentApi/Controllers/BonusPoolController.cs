@@ -30,8 +30,6 @@ namespace SynetecAssessmentApi.Controllers
                 return BadRequest(ex.Message);
             }
            
-
-           
         }
     }
 }

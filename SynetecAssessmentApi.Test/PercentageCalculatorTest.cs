@@ -16,7 +16,6 @@ namespace SynetecAssessmentApi.Test
             var allocationm = new PercentageCalculator();
             var result = allocationm.Persentage(60000,654987);
             Assert.Equal(0.09M, result);
-
         }
     }
 }
