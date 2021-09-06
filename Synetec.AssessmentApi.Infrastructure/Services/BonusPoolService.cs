@@ -28,11 +28,9 @@ namespace SynetecAssessmentApi.Infrastructure.Services
 
                 var totalSalary = await _dbContext.Employees.SumAsync(item => item.Salary);
 
-                var percen = new PercentageCalculator();
-                decimal bonusPercentage = percen.Persentage(employee.Salary, totalSalary);
 
-                var allocation = new AllocationBonus();
-                decimal bonusAllocation = allocation.BonusAllocation(bonusPercentage, bonusPoolAmount);
+                decimal bonusPercentage = Percetange(employee.Salary, totalSalary);
+                decimal bonusAllocation = Allocation(bonusPercentage, bonusPoolAmount);
 
 
 
@@ -44,6 +42,21 @@ namespace SynetecAssessmentApi.Infrastructure.Services
            
 
         }
+        public decimal Percetange(decimal Salary, decimal TotalSalary)
+        {
+            var percentage = new PercentageCalculator();
+            return  percentage.Persentage(Salary, TotalSalary);
+        }
+
+        public decimal Allocation(decimal bonusPercentage, decimal bonusPoolAmount)
+        {
+            var allocation = new AllocationBonus();
+            return allocation.BonusAllocation(bonusPercentage, bonusPoolAmount);
+        }
+
+
+
+
       
     }
 }

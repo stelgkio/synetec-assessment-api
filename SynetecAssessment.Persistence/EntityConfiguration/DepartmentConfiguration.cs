@@ -11,6 +11,11 @@ namespace SynetecAssessmentApi.Persistence.EntityConfiguration
             builder.HasKey(d => d.Id);
             builder.Property(d => d.Id).ValueGeneratedNever();
             builder.ToTable("Departments");
+
+            builder
+             .HasMany(d => d.Employees)
+             .WithOne(d => d.Department)
+             .IsRequired();
         }
     }
 }
